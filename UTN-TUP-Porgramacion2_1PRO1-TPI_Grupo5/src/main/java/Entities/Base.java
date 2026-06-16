@@ -10,4 +10,9 @@ public abstract class Base {
 
     protected LocalDateTime createdAt;
 
+    public Base(Long id, boolean eliminado, LocalDateTime createdAt) {
+        this.id = id;
+        this.eliminado = eliminado;
+        this.createdAt = createdAt;
+    }
 }
