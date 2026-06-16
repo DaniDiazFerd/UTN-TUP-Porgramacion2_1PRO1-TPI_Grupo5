@@ -23,7 +23,7 @@ public class Pedido extends Base{
 
     public DetallePedido findeDetallePedidoByProducto(Producto producto){
 
-        
+
 
     }
 
