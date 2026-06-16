@@ -23,11 +23,11 @@ public class Pedido extends Base{
 
     public DetallePedido findeDetallePedidoByProducto(Producto producto){
 
-
+        
 
     }
 
-    public void deleteDetallePedidoByProducto(Producto){
+    public void deleteDetallePedidoByProducto(Producto producto){
 
 
 
