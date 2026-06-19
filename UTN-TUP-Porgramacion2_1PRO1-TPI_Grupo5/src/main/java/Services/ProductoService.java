@@ -18,14 +18,14 @@ public class ProductoService {
 
     // Crear Producto
 
-    public void crearProducto(Producto producto) {
+    public void crearProducto(Producto producto) throws StockInvalidoException {
         if (producto.getPrecio() < 0) {
-            throw new IllegalArgumentException(
+            throw new StockInvalidoException(
                     "El precio no puede ser negativo."
             );
         }
         if (producto.getStock() < 0) {
-            throw new StockInvalidoException(producto.getNombre(), );
+            throw new StockInvalidoException("El stock no puede ser negativo.");
         }
 
         productos.add(producto);
@@ -64,11 +64,21 @@ public class ProductoService {
                                   String nombre,
                                   Double precio,
                                   int stock,
-                                  Categoria categoria) {
+                                  Categoria categoria)
+            throws StockInvalidoException{
+
         Producto producto = buscarPorId(id);
 
         if(producto == null) {
             return false;
+        }
+
+        if (precio < 0) {
+            throw new StockInvalidoException("El precio no puede ser negativo");
+        }
+
+        if (stock < 0) {
+            throw new StockInvalidoException("El stock no puede ser negativo.");
         }
 
         producto.setNombre(nombre);
@@ -77,5 +87,19 @@ public class ProductoService {
         producto.setCategoria(categoria);
 
         return true;
+    }
+
+    // Listar por Categoria
+
+    public void listarPorCategoria(Categoria categoria) {
+
+        for (Producto producto : productos) {
+
+            if (!producto.isEliminado()
+                    && producto.getCategoria().equals(categoria)) {
+
+                System.out.println(producto);
+            }
+        }
     }
 }
