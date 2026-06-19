@@ -3,23 +3,29 @@ package Entities;
 import java.time.LocalDateTime;
 
 public class Producto extends Base{
+
+    // Variables
     private String nombre;
     private Double precio;
     private String descripcion;
     private int stock;
     private String imagen;
+    private Boolean disponible;
     private Categoria categoria;
 
-    public Producto(Long id, boolean eliminado, LocalDateTime createdAt, String nombre, Double precio, String descripcion, int stock, String imagen, Categoria categoria) {
+    // Constructor
+    public Producto(Long id, boolean eliminado, LocalDateTime createdAt, String nombre, Double precio, String descripcion, int stock, String imagen, Boolean disponible, Categoria categoria) {
         super(id, eliminado, createdAt);
         this.nombre = nombre;
         this.precio = precio;
         this.descripcion = descripcion;
         this.stock = stock;
         this.imagen = imagen;
+        this.disponible = disponible;
         this.categoria = categoria;
     }
 
+    // Getters y Setters
     public String getNombre() {
         return nombre;
     }
@@ -67,5 +73,25 @@ public class Producto extends Base{
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
-    
+
+    public Boolean getDisponible() {
+        return disponible;
+    }
+
+    public void setDisponible(Boolean disponible) {
+        this.disponible = disponible;
+    }
+
+    // toString
+    @Override
+    public String toString() {
+        return "Producto{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", precio=" + precio +
+                ", stock=" + stock +
+                ", disponible=" + disponible +
+                ", categoria=" + categoria.getNombre() +
+                '}';
+    }
 }
