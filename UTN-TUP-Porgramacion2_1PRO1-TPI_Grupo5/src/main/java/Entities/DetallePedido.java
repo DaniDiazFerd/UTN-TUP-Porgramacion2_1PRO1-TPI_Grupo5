@@ -48,7 +48,7 @@ public class DetallePedido extends Base{
     public void setProducto(Producto producto) {
         this.producto = producto;
     }
-    
+
     // toString
 
     @Override
