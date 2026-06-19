@@ -89,6 +89,27 @@ public class ProductoService {
         return true;
     }
 
+    // Eliminar Producto
+
+    public boolean eliminarProducto(Long id) {
+
+        Producto producto = buscarPorId(id);
+
+        if (producto == null) {
+            return false;
+        }
+
+        producto.setEliminado(true);
+
+        return true;
+    }
+
+    // Obtener Lista
+
+    public List<Producto> getProductos() {
+        return productos;
+    }
+
     // Listar por Categoria
 
     public void listarPorCategoria(Categoria categoria) {
