@@ -90,7 +90,6 @@ public class Usuario extends Base{
                 ", apellido='" + apellido + '\'' +
                 ", mail='" + mail + '\'' +
                 ", celular='" + celular + '\'' +
-                ", contraseña='" + contraseña + '\'' +
                 ", rol=" + rol +
                 '}';
     }
