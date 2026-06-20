@@ -90,7 +90,6 @@ public class PedidoService {
 
         pedido.addDetallePedido(
                 cantidad,
-                producto.getPrecio(),
                 producto
         );
 
