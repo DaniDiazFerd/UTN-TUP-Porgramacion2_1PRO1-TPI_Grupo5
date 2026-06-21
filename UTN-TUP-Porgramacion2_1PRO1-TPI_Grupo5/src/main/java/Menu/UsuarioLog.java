@@ -65,19 +65,15 @@ public class UsuarioLog {
             System.out.println("Ingrese su id de usuario: ");
 
             Long idUsuario = scanner.nextLong();
+            scanner.nextLine();
 
-            if (uservice.buscarPorId(idUsuario) != null) {
+            Usuario usuario = ususervice.buscarPorId(idUsuario);
 
-                Usuario usuario = uservice.buscarPorId(idUsuario);
-
+            if (usuario != null) {
                 return usuario;
-
             } else {
-
-                System.out.println("No hay ningún usuario con ese id. Intente de nuevo con otro id o cree un nuevo usuario.");
-
+                System.out.println("No hay ningun usuario con ese id. Intente de nuevo:");
                 return null;
-
             }
 
         }
