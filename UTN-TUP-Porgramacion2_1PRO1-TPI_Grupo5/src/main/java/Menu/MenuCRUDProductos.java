@@ -1,8 +1,9 @@
 package Menu;
-import Entities.*;
+import Entities.Categoria;
+import Entities.Producto;
+import Entities.Usuario;
+import Exceptions.StockInvalidoException;
 import Services.*;
-import Enums.*;
-import Exceptions.*;
 
 import java.time.LocalDateTime;
 import java.util.Scanner;
@@ -30,7 +31,6 @@ public class MenuCRUDProductos {
                     Long id_newProducto = scanner.nextLong();
                     scanner.nextLine();
 
-
                     System.out.println("Ingrese el nombre: ");
                     String nombre_new = scanner.nextLine();
 
@@ -38,9 +38,20 @@ public class MenuCRUDProductos {
                     Double precio_new = scanner.nextDouble();
                     scanner.nextLine();
 
+                    System.out.println("Ingrese la descripción: ");
+                    String descripcion_new = scanner.nextLine();
+
                     System.out.println("Ingrese el stock: ");
                     int stock_new = scanner.nextInt();
                     scanner.nextLine();
+
+                    System.out.println("Ingrese la imagen (URL o nombre de archivo): ");
+                    String imagen_new = scanner.nextLine();
+
+                    System.out.println("¿Está disponible? (1. Sí, 0. No): ");
+                    int dispCodigo_new = scanner.nextInt();
+                    scanner.nextLine();
+                    Boolean disponible_new = (dispCodigo_new == 1);
 
                     System.out.println("Ingrese el id de la categoría: ");
                     Long idCategoria_new = scanner.nextLong();
