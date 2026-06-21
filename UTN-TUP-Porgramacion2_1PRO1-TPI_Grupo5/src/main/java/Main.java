@@ -1,11 +1,6 @@
-import Entities.*;
-import Enums.*;
 import Exceptions.*;
-import Interfaces.*;
-import Services.*;
-import Menu.MenuFoodStore;
+import Menu.MenuCRUDCategorias;
 
-import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class Main {
@@ -34,7 +29,7 @@ public class Main {
 
                 case 1:
 
-                    MenuFoodStore.menuCategoria();
+                    MenuCRUDCategorias.menu();
 
                     break;
 
