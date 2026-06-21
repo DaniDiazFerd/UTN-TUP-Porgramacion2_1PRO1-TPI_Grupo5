@@ -1,8 +1,5 @@
 package Menu;
-import Entities.Categoria;
-import Entities.DetallePedido;
-import Entities.Pedido;
-import Entities.Producto;
+import Entities.*;
 import Enums.*;
 import Services.*;
 
@@ -13,7 +10,7 @@ import java.util.Scanner;
 
 public class MenuCRUDPedidos {
 
-    public static void menu(){
+    public static void menu(Usuario usuario){
 
         System.out.println("\n====== MENÚ PEDIDOS ======");
 
@@ -42,14 +39,6 @@ public class MenuCRUDPedidos {
                     System.out.println("Ingrese el id del nuevo pedido: ");
 
                     Long id_newPedido = scanner.nextLong();
-
-                    System.out.println("Ingrese el nombre del nuevo pedido: ");
-
-                    String nombre_Pedido = scanner.nextLine();
-
-                    System.out.println("Ingrese la descripción del nuevo pedido: ");
-
-                    String descripcion_Pedido = scanner.nextLine();
 
                     System.out.println("Ingrese el estado del pedido (1. PENDIENTE\n2. CONFIRMADO\n3. TERMINADO\n4. CANCELADO): ");
 
@@ -105,7 +94,7 @@ public class MenuCRUDPedidos {
 
                     } while (seguirAgregandoDetalles != 0);
 
-                    Pedido pedido = new Pedido(id_newPedido, false, LocalDateTime.now(), LocalDate.now(), estado, total, formaPago, detallesPedido);
+                    Pedido pedido = new Pedido(id_newPedido, false, LocalDateTime.now(), LocalDate.now(), estado, total, formaPago, usuario, detallesPedido);
 
                     pservice.crearPedido(pedido);
 
@@ -113,19 +102,27 @@ public class MenuCRUDPedidos {
 
                 case 3:
 
-                    System.out.println("Ingrese el id de la categoría que desee editar: ");
+                    System.out.println("Ingrese el id del nuevo pedido: ");
 
-                    Long id_edCategoria = scanner.nextLong();
+                    Long id_edPedido = scanner.nextLong();
 
-                    System.out.println("Ingrese el nuevo nombre de la categoría: ");
+                    System.out.println("Ingrese el estado del pedido (1. PENDIENTE\n2. CONFIRMADO\n3. TERMINADO\n4. CANCELADO): ");
 
-                    String nombre_edCategoria = scanner.nextLine();
+                    est = scanner.nextInt();
 
-                    System.out.println("Ingrese la nueva descripción de la categoría: ");
+                    estado = Estado.fromCodigo(est);
 
-                    String descripcion_edCategoria = scanner.nextLine();
+                    System.out.println("Ingrese la forma de pago del pedido (1. TARJETA\n2. TRANSFERENCIA\n3. EFECTIVO): ");
 
-                    cservice.editarCategoria(id_edCategoria, nombre_edCategoria, descripcion_edCategoria);
+                    fp = scanner.nextInt();
+
+                    formaPago = FormaPago.fromCodigo(fp);
+
+                    Pedido pedidoEditado = new Pedido(id_edPedido, false, LocalDateTime.now(), LocalDate.now(), estado, total, formaPago, usuario, detallesPedido);
+
+                    pservice.eliminarPedido(id_edPedido);
+
+                    pservice.crearPedido(pedidoEditado);
 
                     return;
 

@@ -2,6 +2,7 @@ import Enums.Rol;
 import Exceptions.*;
 import Entities.*;
 import Menu.MenuCRUDCategorias;
+import Menu.MenuCRUDPedidos;
 import Menu.UsuarioLog;
 import Services.UsuarioService;
 
@@ -10,7 +11,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    public void main(String[] args) throws MailDuplicadoException, StockInvalidoException, EntidadNoEncontradaException {
+    public static void main(String[] args) throws MailDuplicadoException, StockInvalidoException, EntidadNoEncontradaException {
 
         Scanner scanner = new Scanner(System.in);
 
@@ -30,11 +31,11 @@ public class Main {
 
             opcionSistema = scanner.nextInt();
 
+            Usuario usuarioActivo = new Usuario(null, false, null, null, null, null, null, null, null);
+
             switch (opcionSistema) {
 
                 case 1:
-
-                    Usuario usuarioActivo = new Usuario(null, false, null, null, null, null, null, null, null);
 
                     do {
 
@@ -50,6 +51,17 @@ public class Main {
 
                     case 2:
 
+                        do {
+
+                            usuarioActivo = UsuarioLog.usuarioLog();
+
+                            break;
+
+                        } while (UsuarioLog.usuarioLog() == null);
+
+                        MenuCRUDPedidos.menu(usuarioActivo);
+
+                        break;
 
                     case 3:
 
