@@ -1,13 +1,8 @@
-import Enums.Rol;
+import Enums.*;
 import Exceptions.*;
 import Entities.*;
-import Menu.MenuCRUDCategorias;
-import Menu.MenuCRUDPedidos;
-import Menu.UsuarioLog;
-import Services.CategoriaService;
-import Services.PedidoService;
-import Services.ProductoService;
-import Services.UsuarioService;
+import Menu.*;
+import Services.*;
 
 import java.time.LocalDateTime;
 import java.util.Scanner;
@@ -18,7 +13,7 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         PedidoService pservice = new PedidoService();
-        ProductoService prodsevice = new ProductoService();
+        ProductoService prodservice = new ProductoService();
         CategoriaService catservice = new CategoriaService();
         UsuarioService ususervice = new UsuarioService();
 
@@ -38,13 +33,11 @@ public class Main {
 
             opcionSistema = scanner.nextInt();
 
-            Usuario usuarioActivo = new Usuario(null, false, null, null, null, null, null, null, null);
-
             switch (opcionSistema) {
 
                 case 1:
 
-                    Usuario usuarioCategorias = UsuarioLog.usuarioLog();
+                    Usuario usuarioCategorias = UsuarioLog.usuarioLog(ususervice , scanner);
 
                     if (usuarioCategorias !=null) {
                         MenuCRUDCategorias.menu(usuarioCategorias);
@@ -56,24 +49,31 @@ public class Main {
 
                     case 2:
 
-                        do {
+                        Usuario usuarioProductos = UsuarioLog.usuarioLog(ususervice, scanner);
 
-                            usuarioActivo = UsuarioLog.usuarioLog();
-
-                            break;
-
-                        } while (UsuarioLog.usuarioLog() == null);
-
-                        MenuCRUDPedidos.menu(usuarioActivo);
+                        if (usuarioProductos != null) {
+                            MenuCRUDProductos.menu(usuarioProductos, prodservice, catservice, scanner);
+                        } else {
+                            System.out.println("\nLogin inválido, volviendo al menú principal.");
+                        }
 
                         break;
 
                     case 3:
 
+                        Usuario usuarioUsuarios = UsuarioLog.usuarioLog(ususervice, scanner);
+
+                        if (usuarioUsuarios != null) {
+                            MenuCRUDUsuarios.menu(usuarioUsuarios, ususervice, scanner);
+                        } else {
+                            System.out.println("\nLogin invalido, volviendo al menu principal.");
+                        }
+
+                        break;
 
                     case 4:
 
-                        Usuario usuarioPedidos = UsuarioLog.usuarioLog();
+                        Usuario usuarioPedidos = UsuarioLog.usuarioLog(ususervice, scanner);
 
                         if (usuarioPedidos != null) {
                             MenuCRUDPedidos.menu(usuarioPedidos, pservice, scanner);
