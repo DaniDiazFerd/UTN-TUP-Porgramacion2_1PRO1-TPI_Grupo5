@@ -8,6 +8,7 @@ import Services.*;
 
 import java.time.LocalDateTime;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MenuCRUDPedidos {
@@ -68,6 +69,8 @@ public class MenuCRUDPedidos {
 
                     int seguirAgregandoDetalles;
 
+                    ArrayList<DetallePedido> detallesPedido = new ArrayList<>();
+
                     do {
 
                         System.out.println("¿Desea ingresar un nuevo detalle? (Ingrese 0. Para NO, o 1. Para SI): ");
@@ -76,39 +79,33 @@ public class MenuCRUDPedidos {
 
                         if (seguirAgregandoDetalles == 1){
 
-                            System.out.println("Ingrese el nombre del producto: ");
+                            System.out.println("Ingrese el id del producto: ");
 
-                            String nombreProducto = scanner.nextLine();
+                            Long idProducto = scanner.nextLong();
 
-                            System.out.println("Ingrese el precio del producto: ");
+                            ProductoService prodservice = new ProductoService();
 
-                            double precioProducto = scanner.nextDouble();
+                            Producto producto = prodservice.buscarPorId(idProducto);
 
-                            System.out.println("Ingrese la descripción del producto: ");
+                            System.out.println("Ingrese la cantidad que desee del producto (Recuerde que no puede superar su stock: " + producto.getStock() + "): ");
 
-                            String descripcionProducto = scanner.nextLine();
+                            int cantidadDetalle = scanner.nextInt();
 
-                            System.out.println("Ingrese el stock del producto: ");
+                            double subtotalDetalle = producto.getPrecio() * cantidadDetalle;
 
-                            int stockProducto = scanner.nextInt();
+                            System.out.println("Ingrese el id del pedido: ");
 
-                            System.out.println("Ingrese el id de la categoría del producto: ");
+                            Long idDetalle = scanner.nextLong();
 
-                            Long idCategoria = scanner.nextLong();
+                            DetallePedido detallePedido = new DetallePedido(idDetalle, false, LocalDateTime.now(), cantidadDetalle, subtotalDetalle, producto);
 
-                            CategoriaService cservice = new CategoriaService();
-
-                            Categoria categoria = cservice.buscarPorId(idCategoria);
-
-                            Producto producto = new Producto(this.getStock(), categoria);
-
-                            DetallePedido detallePedido = new DetallePedido();
+                            detallesPedido.add(detallePedido);
 
                         }
 
                     } while (seguirAgregandoDetalles != 0);
 
-                    Pedido pedido = new Pedido(id_newPedido, false, LocalDateTime.now(), LocalDate.now(), estado, total, formaPago, nombre_Pedido, descripcion_Pedido);
+                    Pedido pedido = new Pedido(id_newPedido, false, LocalDateTime.now(), LocalDate.now(), estado, total, formaPago, detallesPedido);
 
                     pservice.crearPedido(pedido);
 

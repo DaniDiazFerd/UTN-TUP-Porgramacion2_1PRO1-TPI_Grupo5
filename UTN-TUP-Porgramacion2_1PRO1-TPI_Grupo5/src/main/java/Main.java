@@ -1,11 +1,16 @@
+import Enums.Rol;
 import Exceptions.*;
+import Entities.*;
 import Menu.MenuCRUDCategorias;
+import Menu.UsuarioLog;
+import Services.UsuarioService;
 
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class Main {
 
-    public static void main (String[] args) throws MailDuplicadoException, StockInvalidoException, EntidadNoEncontradaException{
+    public void main(String[] args) throws MailDuplicadoException, StockInvalidoException, EntidadNoEncontradaException {
 
         Scanner scanner = new Scanner(System.in);
 
@@ -13,7 +18,7 @@ public class Main {
 
         System.out.println("======== BIENVENIDO AL SISTEMA DE FOOD STORE ========");
 
-        do{
+        do {
 
             System.out.println("=== SISTEMA DE PEDIDOS (FOOD STORE) ===");
 
@@ -25,40 +30,47 @@ public class Main {
 
             opcionSistema = scanner.nextInt();
 
-            switch (opcionSistema){
+            switch (opcionSistema) {
 
                 case 1:
 
-                    MenuCRUDCategorias.menu();
+                    Usuario usuarioActivo = new Usuario(null, false, null, null, null, null, null, null, null);
+
+                    do {
+
+                        usuarioActivo = UsuarioLog.usuarioLog();
+
+                        break;
+
+                    } while (UsuarioLog.usuarioLog() == null);
+
+                    MenuCRUDCategorias.menu(usuarioActivo);
 
                     break;
 
-                case 2:
+                    case 2:
 
 
-
-                case 3:
-
+                    case 3:
 
 
-                case 4:
+                    case 4:
 
 
+                    case 0:
 
-                case 0:
+                        System.out.println("\nGracias por usar el sistema. ¡Vuelva pronto!");
 
-                    System.out.println("\nGracias por usar el sistema. ¡Vuelva pronto!");
+                        break;
 
-                    break;
+                    default:
 
-                default:
+                        System.out.println("\nPor favor, ingrese una instrucción válida.");
 
-                    System.out.println("\nPor favor, ingrese una instrucción válida.");
+                }
 
-            }
+            } while (opcionSistema != 0);
 
-        } while (opcionSistema != 0);
+        }
 
     }
-
-}

@@ -1,13 +1,14 @@
 package Menu;
 import Entities.Categoria;
 import Services.*;
+import Entities.Usuario;
 
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class MenuCRUDCategorias {
 
-    public static void menu(){
+    public static void menu(Usuario usuario){
 
         System.out.println("\n====== MENÚ CATEGORÍAS ======");
 
