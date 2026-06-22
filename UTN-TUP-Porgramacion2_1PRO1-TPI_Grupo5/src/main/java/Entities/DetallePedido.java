@@ -59,4 +59,5 @@ public class DetallePedido extends Base{
                 ", producto=" + producto +
                 '}';
     }
+    //git de prueba 
 }
